@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Danh Sách Ngành</title>
+</head>
+<body>
+    <h1>Danh Sách Ngành</h1>
+
+    <form th:action="@{/nganh}" method="get">
+        <input type="text" name="keyword" th:value="${keyword}" placeholder="Tìm kiếm ngành">
+        <button type="submit">Tìm kiếm</button>
+    </form>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Tên Ngành</th>
+                <th>Hành Động</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="nganh : ${nganhList}">
+                <td th:text="${nganh.id}"></td>
+                <td th:text="${nganh.tenNganh}"></td>
+                <td>
+                    <a th:href="@{/nganh/edit/{id}(id=${nganh.id})}">Sửa</a>
+                    <a th:href="@{/nganh/delete/{id}(id=${nganh.id})}" onclick="return confirm('Bạn có chắc muốn xóa ngành này?')">Xóa</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <br>
+    <a th:href="@{/nganh/create}">Thêm Ngành Mới</a>
+</body>
+</html>

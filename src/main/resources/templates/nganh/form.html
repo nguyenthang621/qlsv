@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Thêm/Sửa Ngành</title>
+</head>
+<body>
+    <h1 th:text="${nganh.id != null ? 'Sửa Ngành' : 'Thêm Ngành Mới'}"></h1>
+
+    <form th:action="@{/nganh/save}" th:object="${nganh}" method="post">
+        <input type="hidden" th:field="*{id}"/>
+        <div>
+            <label for="tenNganh">Tên Ngành:</label>
+            <input type="text" id="tenNganh" th:field="*{tenNganh}" required>
+        </div>
+
+        <br>
+        <button type="submit">Lưu</button>
+        <a th:href="@{/nganh}">Hủy</a>
+    </form>
+</body>
+</html>

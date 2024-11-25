@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Danh Sách Trường</title>
+</head>
+<body>
+    <h1>Danh Sách Trường</h1>
+
+    <!-- Bảng danh sách trường -->
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Mã Trường</th>
+                <th>Tên Trường</th>
+                <th>Hành Động</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="truong : ${truongList}">
+                <td th:text="${truong.maTruong}"></td>
+                <td th:text="${truong.tenTruong}"></td>
+                <td>
+                    <a th:href="@{/truong/edit/{maTruong}(maTruong=${truong.maTruong})}">Sửa</a>
+                    <a th:href="@{/truong/delete/{maTruong}(maTruong=${truong.maTruong})}" onclick="return confirm('Bạn có chắc muốn xóa trường này?')">Xóa</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <br>
+    <a th:href="@{/truong/create}">Thêm Trường Mới</a>
+</body>
+</html>

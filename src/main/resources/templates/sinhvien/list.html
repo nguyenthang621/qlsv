@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Danh Sách Sinh Viên</title>
+</head>
+<body>
+    <h1>Danh Sách Sinh Viên</h1>
+
+    <!-- Form tìm kiếm -->
+    <form th:action="@{/sinhvien}" method="get">
+        <input type="text" name="keyword" th:value="${keyword}" placeholder="Tìm kiếm sinh viên">
+        <button type="submit">Tìm kiếm</button>
+    </form>
+
+    <!-- Bảng danh sách sinh viên -->
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Họ Tên</th>
+                <th>Email</th>
+                <th>Số Điện Thoại</th>
+                <th>Địa Chỉ</th>
+                <th>CMND</th>
+                <th>Trường</th>
+                <th>Ngành</th>
+                <th>Hành Động</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="sinhVien : ${sinhVienList}">
+                <td th:text="${sinhVien.id}"></td>
+                <td th:text="${sinhVien.hoTen}"></td>
+                <td th:text="${sinhVien.email}"></td>
+                <td th:text="${sinhVien.phone}"></td>
+                <td th:text="${sinhVien.diaChi}"></td>
+                <td th:text="${sinhVien.soCMND}"></td>
+                <td th:text="${sinhVien.truong.tenTruong}"></td>
+                <td th:text="${sinhVien.nganh.tenNganh}"></td>
+                <td>
+                    <a th:href="@{/sinhvien/edit/{id}(id=${sinhVien.id})}">Sửa</a>
+                    <a th:href="@{/sinhvien/delete/{id}(id=${sinhVien.id})}" onclick="return confirm('Bạn có chắc muốn xóa?')">Xóa</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <br>
+    <a th:href="@{/sinhvien/create}">Thêm Sinh Viên Mới</a>
+</body>
+</html>

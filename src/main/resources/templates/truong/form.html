@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Thêm/Sửa Trường</title>
+</head>
+<body>
+    <h1 th:text="${truong.maTruong != null ? 'Sửa Thông Tin Trường' : 'Thêm Trường Mới'}"></h1>
+
+    <!-- Form thêm/sửa -->
+    <form th:action="@{/truong/save}" th:object="${truong}" method="post">
+        <div>
+            <label for="maTruong">Mã Trường:</label>
+            <input type="text" id="maTruong" th:field="*{maTruong}" th:readonly="${truong.maTruong != null}" required>
+        </div>
+
+        <div>
+            <label for="tenTruong">Tên Trường:</label>
+            <input type="text" id="tenTruong" th:field="*{tenTruong}" required>
+        </div>
+
+        <br>
+        <button type="submit">Lưu</button>
+        <a th:href="@{/truong}">Hủy</a>
+    </form>
+</body>
+</html>
