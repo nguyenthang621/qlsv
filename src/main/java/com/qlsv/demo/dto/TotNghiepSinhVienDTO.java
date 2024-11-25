@@ -8,9 +8,8 @@ public class TotNghiepSinhVienDTO {
     private LocalDate ngayTotNghiep;
     private String hoTen;
     private String email;
-    private String chuyenNganh;  // Hoặc String tenNganh nếu bạn lấy tên ngành từ ChuyenNganh
+    private String chuyenNganh;  
 
-    // Constructor để khởi tạo các trường
     public TotNghiepSinhVienDTO(String maCongTy, String tenCongTy, LocalDate ngayTotNghiep, String hoTen, String email, String chuyenNganh) {
         this.maCongTy = maCongTy;
         this.tenCongTy = tenCongTy;

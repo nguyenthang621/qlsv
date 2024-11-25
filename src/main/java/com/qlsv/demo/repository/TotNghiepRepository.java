@@ -25,10 +25,10 @@ public interface TotNghiepRepository extends JpaRepository<TotNghiep, Long> {
 
 	@Query("SELECT new com.qlsv.demo.dto.TotNghiepSinhVienDTO( "
 		       + "t.maCongTy, t.tenCongTy, t.ngayTotNghiep, s.hoTen, s.email, "
-		       + "t.chuyenNganh.tenNganh) "  // Lấy tên ngành từ đối tượng chuyenNganh
+		       + "t.chuyenNganh.tenNganh) "  
 		       + "FROM TotNghiep t "
 		       + "JOIN t.sinhVien s "
-		       + "LEFT JOIN t.chuyenNganh c "  // Thêm LEFT JOIN nếu chuyenNganh là một đối tượng
+		       + "LEFT JOIN t.chuyenNganh c "  
 		       + "WHERE (:maCongTy IS NULL OR t.maCongTy LIKE CONCAT('%', :maCongTy, '%')) "
 		       + "AND (:tenCongTy IS NULL OR t.tenCongTy LIKE CONCAT('%', :tenCongTy, '%')) "
 		       + "AND (:chuyenNganh IS NULL OR t.chuyenNganh.tenNganh LIKE CONCAT('%', :chuyenNganh, '%')) "
