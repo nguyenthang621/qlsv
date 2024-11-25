@@ -3,61 +3,69 @@ package com.qlsv.demo.dto;
 import java.time.LocalDate;
 
 public class TotNghiepSinhVienDTO {
+    private String maCongTy;
+    private String tenCongTy;
+    private LocalDate ngayTotNghiep;
+    private String hoTen;
+    private String email;
+    private String chuyenNganh;  // Hoặc String tenNganh nếu bạn lấy tên ngành từ ChuyenNganh
 
-	private String maCongTy;
-	private String tenCongTy;
-	private LocalDate ngayTotNghiep;
-	private String hoTenSinhVien;
-	private String emailSinhVien;
+    // Constructor để khởi tạo các trường
+    public TotNghiepSinhVienDTO(String maCongTy, String tenCongTy, LocalDate ngayTotNghiep, String hoTen, String email, String chuyenNganh) {
+        this.maCongTy = maCongTy;
+        this.tenCongTy = tenCongTy;
+        this.ngayTotNghiep = ngayTotNghiep;
+        this.hoTen = hoTen;
+        this.email = email;
+        this.chuyenNganh = chuyenNganh;
+    }
 
-	// Constructor
-	public TotNghiepSinhVienDTO(String maCongTy, String tenCongTy, LocalDate ngayTotNghiep, String hoTenSinhVien,
-			String emailSinhVien) {
-		this.maCongTy = maCongTy;
-		this.tenCongTy = tenCongTy;
-		this.ngayTotNghiep = ngayTotNghiep;
-		this.hoTenSinhVien = hoTenSinhVien;
-		this.emailSinhVien = emailSinhVien;
-	}
+    // Getters and setters
+    public String getMaCongTy() {
+        return maCongTy;
+    }
 
-	// Getters và Setters
-	public String getMaCongTy() {
-		return maCongTy;
-	}
+    public void setMaCongTy(String maCongTy) {
+        this.maCongTy = maCongTy;
+    }
 
-	public void setMaCongTy(String maCongTy) {
-		this.maCongTy = maCongTy;
-	}
+    public String getTenCongTy() {
+        return tenCongTy;
+    }
 
-	public String getTenCongTy() {
-		return tenCongTy;
-	}
+    public void setTenCongTy(String tenCongTy) {
+        this.tenCongTy = tenCongTy;
+    }
 
-	public void setTenCongTy(String tenCongTy) {
-		this.tenCongTy = tenCongTy;
-	}
+    public LocalDate getNgayTotNghiep() {
+        return ngayTotNghiep;
+    }
 
-	public LocalDate getNgayTotNghiep() {
-		return ngayTotNghiep;
-	}
+    public void setNgayTotNghiep(LocalDate ngayTotNghiep) {
+        this.ngayTotNghiep = ngayTotNghiep;
+    }
 
-	public void setNgayTotNghiep(LocalDate ngayTotNghiep) {
-		this.ngayTotNghiep = ngayTotNghiep;
-	}
+    public String getHoTen() {
+        return hoTen;
+    }
 
-	public String getHoTenSinhVien() {
-		return hoTenSinhVien;
-	}
+    public void setHoTen(String hoTen) {
+        this.hoTen = hoTen;
+    }
 
-	public void setHoTenSinhVien(String hoTenSinhVien) {
-		this.hoTenSinhVien = hoTenSinhVien;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public String getEmailSinhVien() {
-		return emailSinhVien;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public void setEmailSinhVien(String emailSinhVien) {
-		this.emailSinhVien = emailSinhVien;
-	}
+    public String getChuyenNganh() {
+        return chuyenNganh;
+    }
+
+    public void setChuyenNganh(String chuyenNganh) {
+        this.chuyenNganh = chuyenNganh;
+    }
 }

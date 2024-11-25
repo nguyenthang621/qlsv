@@ -19,9 +19,9 @@ public class TotNghiepController {
 	@Autowired
 	private TotNghiepService totNghiepService;
 
-	@RequestMapping("/search")
+	@RequestMapping("")
 	public String showSearchForm() {
-		return "timkiem/searchForm";
+		return "totnghiep/searchForm";
 	}
 
 	@GetMapping("/excute-search")
@@ -30,16 +30,17 @@ public class TotNghiepController {
 			@RequestParam(value = "chuyenNganh", required = false) String chuyenNganh,
 			@RequestParam(value = "ngayTotNghiep", required = false) String ngayTotNghiepStr) {
 
+
 		LocalDate ngayTotNghiep = null;
 		if (ngayTotNghiepStr != null && !ngayTotNghiepStr.isEmpty()) {
 			ngayTotNghiep = LocalDate.parse(ngayTotNghiepStr);
 		}
+		System.out.println("ngayTotNghiep: " + ngayTotNghiep);
 
-		List<TotNghiepSinhVienDTO> totNghieps = totNghiepService.searchTotNghiep(maCongTy, tenCongTy, chuyenNganh,
+		List<TotNghiepSinhVienDTO> results = totNghiepService.searchTotNghiep(maCongTy, tenCongTy, chuyenNganh,
 				ngayTotNghiep);
-		System.out.println(totNghieps.toString());
-		model.addAttribute("totNghieps", totNghieps);
-		return "timkiem/searchResult";
+		model.addAttribute("results", results);
+		return "totnghiep/searchResult";
 	}
 
 }

@@ -23,14 +23,15 @@
         </thead>
         <tbody>
             <th:block th:each="totNghiep : ${results}">
-                <tr>
-                   <td th:text="${totNghiep.hoTenSinhVien}"></td>
-                    <td th:text="${totNghiep.emailSinhVien}"></td>
-                    <td th:text="${totNghiep.maCongTy}"></td>
-                    <td th:text="${totNghiep.tenCongTy}"></td>
-                    <td th:text="${totNghiep.chuyenNganh.tenNganh}"></td>
-                    <td th:text="${totNghiep.ngayTotNghiep}"></td>   
-                </tr>
+				<tr>
+				    <td th:text="${totNghiep.hoTen}"></td>
+				    <td th:text="${totNghiep.email}"></td>
+				    <td th:text="${totNghiep.maCongTy}"></td>
+				    <td th:text="${totNghiep.tenCongTy}"></td>
+				    <td th:text="${totNghiep.chuyenNganh}"></td> 
+				    <td th:text="${totNghiep.ngayTotNghiep}"></td>
+				</tr>
+
             </th:block>
         </tbody>
     </table>

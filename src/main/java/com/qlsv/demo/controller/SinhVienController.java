@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.qlsv.demo.model.Nganh;
 import com.qlsv.demo.model.SinhVien;
 import com.qlsv.demo.model.TotNghiep;
 import com.qlsv.demo.service.NganhService;
@@ -46,9 +47,12 @@ public class SinhVienController {
 
 	@PostMapping("/save")
 	public String saveSinhVien(@ModelAttribute SinhVien sinhVien, @ModelAttribute TotNghiep totNghiep) {
-		sinhVienService.save(sinhVien);
-
 		totNghiep.setSinhVien(sinhVien);
+		sinhVienService.save(sinhVien);
+		Nganh nganh = new Nganh();
+		nganh.setId(sinhVien.getNganh().getId());
+		totNghiep.setChuyenNganh(nganh);
+		
 		totNghiepService.save(totNghiep);
 
 		return "redirect:/sinhvien";
@@ -78,17 +82,6 @@ public class SinhVienController {
 		return "redirect:/sinhvien";
 	}
 
-	@GetMapping("/search")
-	public List<TotNghiep> searchTotNghiep(@RequestParam(required = false) String chuyenNganh,
-			@RequestParam(required = false) String tenCongTy, @RequestParam(required = false) String maCongTy) {
 
-		if (tenCongTy != null) {
-			return totNghiepService.searchByTenCongTy(tenCongTy);
-		} else if (maCongTy != null) {
-			return totNghiepService.searchByMaCongTy(maCongTy);
-		} else {
-			return totNghiepService.getAllTotNghiep();
-		}
-	}
 
 }

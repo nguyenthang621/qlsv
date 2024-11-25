@@ -11,7 +11,6 @@ import javax.persistence.OneToMany;
 import lombok.Data;
 
 @Entity
-@Data
 
 public class Truong {
 
@@ -23,5 +22,30 @@ public class Truong {
 
 	@OneToMany(mappedBy = "truong", cascade = CascadeType.ALL)
 	private List<SinhVien> sinhViens;
+
+	public String getMaTruong() {
+		return maTruong;
+	}
+
+	public void setMaTruong(String maTruong) {
+		this.maTruong = maTruong;
+	}
+
+	public String getTenTruong() {
+		return tenTruong;
+	}
+
+	public void setTenTruong(String tenTruong) {
+		this.tenTruong = tenTruong;
+	}
+
+	public List<SinhVien> getSinhViens() {
+		return sinhViens;
+	}
+
+	public void setSinhViens(List<SinhVien> sinhViens) {
+		this.sinhViens = sinhViens;
+	}
+	
 
 }

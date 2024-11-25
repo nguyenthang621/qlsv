@@ -13,7 +13,6 @@ import javax.persistence.OneToMany;
 import lombok.Data;
 
 @Entity
-@Data
 public class Nganh {
 
 	@Id
@@ -25,5 +24,29 @@ public class Nganh {
 
 	@OneToMany(mappedBy = "nganh", cascade = CascadeType.ALL)
 	private List<SinhVien> sinhViens;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getTenNganh() {
+		return tenNganh;
+	}
+
+	public void setTenNganh(String tenNganh) {
+		this.tenNganh = tenNganh;
+	}
+
+	public List<SinhVien> getSinhViens() {
+		return sinhViens;
+	}
+
+	public void setSinhViens(List<SinhVien> sinhViens) {
+		this.sinhViens = sinhViens;
+	}
 
 }
