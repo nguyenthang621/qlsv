@@ -1,56 +1,78 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Thêm/Sửa Sinh Viên</title>
+    <title>Thêm Sinh Viên và Thông Tin Tốt Nghiệp</title>
 </head>
 <body>
-    <h1 th:text="${sinhVien.id != null ? 'Sửa Sinh Viên' : 'Thêm Sinh Viên'}"></h1>
+    <h1 th:text="${sinhVien.id != null ? 'Sửa Sinh Viên và Thông Tin Tốt Nghiệp' : 'Thêm Sinh Viên và Thông Tin Tốt Nghiệp'}"></h1>
 
-    <!-- Form thêm/sửa -->
-    <form th:action="@{/sinhvien/save}" th:object="${sinhVien}" method="post">
-        <input type="hidden" th:field="*{id}"/> <!-- ID ẩn khi chỉnh sửa -->
-
+    <form th:action="@{/sinhvien/save}" method="post">
+        <!-- Thông tin Sinh Viên -->
         <div>
             <label for="hoTen">Họ Tên:</label>
-            <input type="text" id="hoTen" th:field="*{hoTen}" required>
+            <input type="text" id="hoTen" th:field="*{sinhVien.hoTen}" required/>
         </div>
 
         <div>
             <label for="email">Email:</label>
-            <input type="email" id="email" th:field="*{email}" required>
+            <input type="email" id="email" th:field="*{sinhVien.email}" required/>
         </div>
 
         <div>
             <label for="phone">Số Điện Thoại:</label>
-            <input type="text" id="phone" th:field="*{phone}" required>
-        </div>
-
-        <div>
-            <label for="diaChi">Địa Chỉ:</label>
-            <input type="text" id="diaChi" th:field="*{diaChi}" required>
+            <input type="text" id="phone" th:field="*{sinhVien.phone}" required/>
         </div>
 
         <div>
             <label for="soCMND">Số CMND:</label>
-            <input type="text" id="soCMND" th:field="*{soCMND}" required>
+            <input type="text" id="soCMND" th:field="*{sinhVien.soCMND}" required/>
         </div>
 
+        <!-- Chọn Trường -->
         <div>
             <label for="truong">Trường:</label>
-            <select id="truong" th:field="*{truong}" required>
-                <option th:each="truong : ${truongList}" th:value="${truong}" th:text="${truong.tenTruong}"></option>
+            <select id="truong" th:field="*{sinhVien.truong}" required>
+                <option value="" disabled selected>Chọn Trường</option>
+                <option th:each="truong : ${truongList}" 
+                        th:value="${truong.maTruong}" 
+                        th:text="${truong.tenTruong}">
+                </option>
             </select>
         </div>
 
-		<div>
-		    <label for="nganh">Ngành:</label>
-		    <select id="nganh" th:field="*{nganh.id}" required>
-		        <option th:each="nganh : ${nganhList}" th:value="${nganh.id}" th:text="${nganh.tenNganh}"></option>
-		    </select>
-		</div>
+        <!-- Chọn Ngành -->
+        <div>
+            <label for="nganh">Ngành:</label>
+            <select id="nganh" th:field="*{sinhVien.nganh}" required>
+                <option value="" disabled selected>Chọn Ngành</option>
+                <option th:each="nganh : ${nganhList}" 
+                        th:value="${nganh.id}" 
+                        th:text="${nganh.tenNganh}">
+                </option>
+            </select>
+        </div>
 
+        <!-- Thông Tin Tốt Nghiệp -->
+        <div>
+            <label for="ngayTotNghiep">Ngày Tốt Nghiệp:</label>
+            <input type="date" id="ngayTotNghiep" th:field="*{totNghiep.ngayTotNghiep}" required/>
+        </div>
 
-        <br>
+        <div>
+            <label for="tenCongTy">Công Ty:</label>
+            <input type="text" id="tenCongTy" th:field="*{totNghiep.tenCongTy}" required/>
+        </div>
+
+        <div>
+            <label for="maCongTy">Mã Công Ty:</label>
+            <input type="text" id="maCongTy" th:field="*{totNghiep.maCongTy}" required/>
+        </div>
+
+        <div>
+            <label for="thoiGianLamViec">Thời Gian Làm Việc:</label>
+            <input type="number" id="thoiGianLamViec" th:field="*{totNghiep.thoiGianLamViec}" required/>
+        </div>
+
         <button type="submit">Lưu</button>
         <a th:href="@{/sinhvien}">Hủy</a>
     </form>

@@ -1,5 +1,6 @@
 package com.qlsv.demo.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,14 +22,16 @@ public class SinhVien {
 	private String email;
 	private String phone;
 	private String diaChi;
+
+	@Column(unique = true, nullable = false)
 	private String soCMND;
 
 	@ManyToOne
-	@JoinColumn(name = "maTruong", referencedColumnName = "maTruong")
+	@JoinColumn(name = "maTruong", referencedColumnName = "maTruong", nullable = false)
 	private Truong truong;
 
 	@ManyToOne
-	@JoinColumn(name = "nganh_id", referencedColumnName = "id")
+	@JoinColumn(name = "nganh_id", referencedColumnName = "id", nullable = false)
 	private Nganh nganh;
 
 }

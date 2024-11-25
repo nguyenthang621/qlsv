@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.qlsv.demo.model.SinhVien;
+import com.qlsv.demo.model.TotNghiep;
 import com.qlsv.demo.service.NganhService;
 import com.qlsv.demo.service.SinhVienService;
+import com.qlsv.demo.service.TotNghiepService;
 import com.qlsv.demo.service.TruongService;
 
 @Controller
@@ -30,51 +32,63 @@ public class SinhVienController {
 	@Autowired
 	private NganhService nganhService;
 
-	// Danh sách sinh viên + tìm kiếm
+	@Autowired
+	private TotNghiepService totNghiepService;
+
+	@GetMapping("/create")
+	public String newSinhVien(Model model) {
+		model.addAttribute("sinhVien", new SinhVien());
+		model.addAttribute("totNghiep", new TotNghiep());
+		model.addAttribute("truongList", truongService.findAll());
+		model.addAttribute("nganhList", nganhService.findAll());
+		return "sinhvien/form";
+	}
+
+	@PostMapping("/save")
+	public String saveSinhVien(@ModelAttribute SinhVien sinhVien, @ModelAttribute TotNghiep totNghiep) {
+		sinhVienService.save(sinhVien);
+
+		totNghiep.setSinhVien(sinhVien);
+		totNghiepService.save(totNghiep);
+
+		return "redirect:/sinhvien";
+	}
+
 	@GetMapping
 	public String listSinhVien(@RequestParam(value = "keyword", required = false) String keyword, Model model) {
 		List<SinhVien> sinhVienList;
-		if (keyword != null && !keyword.isEmpty()) {
-			sinhVienList = sinhVienService.searchByHoTen(keyword);
+		if (keyword != null && !keyword.trim().isEmpty()) {
+			sinhVienList = sinhVienService.searchByHoTen(keyword.trim());
 		} else {
 			sinhVienList = sinhVienService.findAll();
 		}
+
+		for (SinhVien sinhVien : sinhVienList) {
+			totNghiepService.findBySinhVien(sinhVien);
+		}
+
 		model.addAttribute("sinhVienList", sinhVienList);
 		model.addAttribute("keyword", keyword);
 		return "sinhvien/list";
 	}
 
-	// Hiển thị form thêm sinh viên
-	@GetMapping("/create")
-	public String showCreateForm(Model model) {
-		model.addAttribute("sinhVien", new SinhVien());
-		model.addAttribute("truongList", truongService.findAll());
-		model.addAttribute("nganhList", nganhService.findAll());
-		return "sinhvien/form";
-	}
-
-	// Hiển thị form chỉnh sửa sinh viên
-	@GetMapping("/edit/{id}")
-	public String showEditForm(@PathVariable Long id, Model model) {
-		SinhVien sinhVien = sinhVienService.findById(id)
-				.orElseThrow(() -> new IllegalArgumentException("Invalid SinhVien ID: " + id));
-		model.addAttribute("sinhVien", sinhVien);
-		model.addAttribute("truongList", truongService.findAll());
-		model.addAttribute("nganhList", nganhService.findAll());
-		return "sinhvien/form";
-	}
-
-	// Lưu hoặc cập nhật sinh viên
-	@PostMapping("/save")
-	public String saveSinhVien(@ModelAttribute SinhVien sinhVien) {
-		sinhVienService.save(sinhVien);
-		return "redirect:/sinhvien";
-	}
-
-	// Xóa sinh viên
 	@GetMapping("/delete/{id}")
 	public String deleteSinhVien(@PathVariable Long id) {
 		sinhVienService.deleteById(id);
 		return "redirect:/sinhvien";
 	}
+
+	@GetMapping("/search")
+	public List<TotNghiep> searchTotNghiep(@RequestParam(required = false) String chuyenNganh,
+			@RequestParam(required = false) String tenCongTy, @RequestParam(required = false) String maCongTy) {
+
+		if (tenCongTy != null) {
+			return totNghiepService.searchByTenCongTy(tenCongTy);
+		} else if (maCongTy != null) {
+			return totNghiepService.searchByMaCongTy(maCongTy);
+		} else {
+			return totNghiepService.getAllTotNghiep();
+		}
+	}
+
 }

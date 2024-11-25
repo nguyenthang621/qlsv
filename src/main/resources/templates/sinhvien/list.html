@@ -35,7 +35,8 @@
                 <td th:text="${sinhVien.phone}"></td>
                 <td th:text="${sinhVien.diaChi}"></td>
                 <td th:text="${sinhVien.soCMND}"></td>
-                <td th:text="${sinhVien.truong.tenTruong}"></td>
+                <td th:text="${sinhVien.truong != null ? sinhVien.truong.tenTruong : 'Chưa cập nhật'}"></td>
+
                 <td th:text="${sinhVien.nganh.tenNganh}"></td>
                 <td>
                     <a th:href="@{/sinhvien/edit/{id}(id=${sinhVien.id})}">Sửa</a>

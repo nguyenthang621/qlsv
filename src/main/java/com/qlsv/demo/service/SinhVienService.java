@@ -37,7 +37,7 @@ class SinhVienServiceIml implements SinhVienService {
 	}
 
 	public List<SinhVien> searchByHoTen(String keyword) {
-		return sinhVienRepository.findByHoTenContaining(keyword);
+		return sinhVienRepository.searchByKeyword(keyword);
 	}
 
 	public SinhVien save(SinhVien sinhVien) {
@@ -47,4 +47,5 @@ class SinhVienServiceIml implements SinhVienService {
 	public void deleteById(Long id) {
 		sinhVienRepository.deleteById(id);
 	}
+
 }
