@@ -13,6 +13,8 @@
     <table border="1" cellpadding="10">
         <thead>
             <tr>
+                <th>Họ tên Sinh viên</th>
+                <th>Email</th>
                 <th>Mã công ty</th>
                 <th>Tên công ty</th>
                 <th>Chuyên ngành</th>
@@ -22,10 +24,12 @@
         <tbody>
             <th:block th:each="totNghiep : ${results}">
                 <tr>
+                   <td th:text="${totNghiep.hoTenSinhVien}"></td>
+                    <td th:text="${totNghiep.emailSinhVien}"></td>
                     <td th:text="${totNghiep.maCongTy}"></td>
                     <td th:text="${totNghiep.tenCongTy}"></td>
                     <td th:text="${totNghiep.chuyenNganh.tenNganh}"></td>
-                    <td th:text="${totNghiep.ngayTotNghiep}"></td>
+                    <td th:text="${totNghiep.ngayTotNghiep}"></td>   
                 </tr>
             </th:block>
         </tbody>

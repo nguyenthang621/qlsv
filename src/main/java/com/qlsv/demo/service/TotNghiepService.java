@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.qlsv.demo.dto.TotNghiepSinhVienDTO;
 import com.qlsv.demo.model.SinhVien;
 import com.qlsv.demo.model.TotNghiep;
 import com.qlsv.demo.repository.TotNghiepRepository;
@@ -30,7 +31,7 @@ public interface TotNghiepService {
 
 	public List<TotNghiep> getAllTotNghiep();
 
-	public List<TotNghiep> searchTotNghiep(String maCongTy, String tenCongTy, String chuyenNganh,
+	public List<TotNghiepSinhVienDTO> searchTotNghiep(String maCongTy, String tenCongTy, String chuyenNganh,
 			LocalDate ngayTotNghiep);
 
 }
@@ -83,7 +84,7 @@ class TotNghiepServiceImp implements TotNghiepService {
 //		System.out.println(result.toString());
 //		return result;
 //	}
-	public List<TotNghiep> searchTotNghiep(String maCongTy, String tenCongTy, String chuyenNganh,
+	public List<TotNghiepSinhVienDTO> searchTotNghiep(String maCongTy, String tenCongTy, String chuyenNganh,
 			LocalDate ngayTotNghiep) {
 		return totNghiepRepository.searchTotNghiep(maCongTy, tenCongTy, chuyenNganh, ngayTotNghiep);
 	}

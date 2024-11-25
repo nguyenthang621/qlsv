@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import com.qlsv.demo.dto.TotNghiepSinhVienDTO;
 import com.qlsv.demo.model.SinhVien;
 import com.qlsv.demo.model.TotNghiep;
 
@@ -22,12 +23,13 @@ public interface TotNghiepRepository extends JpaRepository<TotNghiep, Long> {
 
 	List<TotNghiep> findBySinhVien(SinhVien sinhVien);
 
-	@Query("SELECT t FROM TotNghiep t " + "JOIN FETCH t.sinhVien s "
+	@Query("SELECT new com.qlsv.demo.dto.TotNghiepSinhVienDTO(t.maCongTy, t.tenCongTy, t.ngayTotNghiep, s.hoTen, s.email) "
+			+ "FROM TotNghiep t " + "JOIN t.sinhVien s "
 			+ "WHERE (:maCongTy IS NULL OR t.maCongTy LIKE CONCAT('%',:maCongTy,'%')) AND "
 			+ "(:tenCongTy IS NULL OR t.tenCongTy LIKE CONCAT('%',:tenCongTy,'%')) AND "
 			+ "(:chuyenNganh IS NULL OR t.chuyenNganh.tenNganh LIKE CONCAT('%',:chuyenNganh,'%')) AND "
-			+ "(:ngayTotNghiep IS NULL OR FUNCTION('DATE', t.ngayTotNghiep) = FUNCTION('DATE', :ngayTotNghiep))")
-	List<TotNghiep> searchTotNghiep(@Param("maCongTy") String maCongTy, @Param("tenCongTy") String tenCongTy,
+			+ "(:ngayTotNghiep IS NULL OR t.ngayTotNghiep = :ngayTotNghiep)")
+	List<TotNghiepSinhVienDTO> searchTotNghiep(@Param("maCongTy") String maCongTy, @Param("tenCongTy") String tenCongTy,
 			@Param("chuyenNganh") String chuyenNganh, @Param("ngayTotNghiep") LocalDate ngayTotNghiep);
 
 }
